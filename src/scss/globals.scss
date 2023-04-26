@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&display=swap');
+
+:root {
+    --max-width: 1100px;
+    --border-radius: 12px;
+    --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+        'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+        'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+
+    --main-color: #ed8554;
+    --second-color: #5f236b;
+    --third-color: #be375f;
+    --four-color: #f5eb6d;
+
+    --primary-glow: conic-gradient(from 180deg at 50% 50%,
+            #16abff33 0deg,
+            #0885ff33 55deg,
+            #54d6ff33 120deg,
+            #0071ff33 160deg,
+            transparent 360deg);
+    --secondary-glow: radial-gradient(rgba(255, 255, 255, 1),
+            rgba(255, 255, 255, 0));
+
+    --tile-start-rgb: 239, 245, 249;
+    --tile-end-rgb: 228, 232, 233;
+    --tile-border: conic-gradient(#00000080,
+            #00000040,
+            #00000030,
+            #00000020,
+            #00000010,
+            #00000010,
+            #00000080);
+
+    --callout-rgb: 238, 240, 241;
+    --callout-border-rgb: 172, 175, 176;
+    --card-rgb: 180, 185, 188;
+    --card-border-rgb: 131, 134, 135;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    background-color: var(--second-color);
+    color: #fff;
+    scroll-behavior: smooth;
+    font-family: 'Kanit', sans-serif;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.max-w-screen-xl {
+    max-width: 1280px;
+}
+
+.max-w-screen-lg {
+    max-width: 1024px;
+}
+
+.max-w-screen-md {
+    max-width: 768px;
+}
+
+.px-4 {
+    padding: 0px 16px;
+}
+
+.container {
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .container {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1024px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1280px;
+    }
+}
