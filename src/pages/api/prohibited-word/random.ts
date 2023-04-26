@@ -28,7 +28,7 @@ export default async function handler(
     if (!_then) {
       const err = new Error()
       err.message = 'หมดแล้ว reset เกม'
-      res.status(404).json({ err })
+      return res.status(404).json({ err })
     }
     const filter = { _id: new ObjectId(_then._id) }
     db.updateOne(filter, { $set: { show: false } })

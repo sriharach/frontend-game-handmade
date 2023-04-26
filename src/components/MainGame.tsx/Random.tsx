@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 import React, { useState } from 'react'
 import { Button, Divider, Spin, Typography, Space } from 'antd'
 import { randomData } from '@/service/api-game'
@@ -34,7 +35,7 @@ const Random = ({ name, setMode }: RandomI) => {
             <Spin />
           </div>
         ) : (
-          <Typography.Title level={1} style={{ fontSize: 84 }}>
+          <Typography.Title style={{ fontSize: 98 }}>
             {randomResult}
           </Typography.Title>
         )}
@@ -42,9 +43,11 @@ const Random = ({ name, setMode }: RandomI) => {
       <Divider />
       <Space>
         <Button onClick={() => setMode('board')}>กลับ</Button>
-        <Button disabled={!!randomResult} onClick={rander} type='primary'>
-          สุ่ม
-        </Button>
+        {!!randomResult ? null : (
+          <Button onClick={rander} type='primary'>
+            สุ่ม
+          </Button>
+        )}
       </Space>
     </>
   )

@@ -26,5 +26,5 @@ export default async function handler(
   }))
 
   db.insertMany(newDate)
-  res.json({ success: 'OK' })
+  res.status(201).json({ success: 'OK' })
 }

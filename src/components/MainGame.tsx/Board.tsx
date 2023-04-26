@@ -16,13 +16,16 @@ const Board = ({ name, setMode }: BoardI) => {
   const [loadButtonRemove, setLoadButtonRemove] = useState(false)
   const [data, setData] = useState<Array<PayloadBodyWord>>([])
 
+  const randerData = async () => {
+    const response: Array<PayloadBodyWord> = await getData()
+    setData(response)
+    setLoadPage(false)
+  }
+
   useEffect(() => {
-    ;(async () => {
-      const response: Array<PayloadBodyWord> = await getData()
-      setData(response)
-      setLoadPage(!loadPage)
-    })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    randerData()
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleReset = async () => {
@@ -35,6 +38,7 @@ const Board = ({ name, setMode }: BoardI) => {
   const handleRemove = async () => {
     setLoadButtonRemove(true)
     await removeData()
+    await randerData()
     message.success('ลบหมดแล้ว!')
     setLoadButtonRemove(false)
   }
@@ -61,13 +65,13 @@ const Board = ({ name, setMode }: BoardI) => {
         }}
       >
         <Space size='small'>
-          <ButtonEven onClick={handleReset} danger loading={loadButtonReset}>
+          <ButtonEven onClick={handleReset} danger loading={loadButtonReset} disabled={data.length === 0}>
             รีเซ็ตเกม
           </ButtonEven>
-          <ButtonEven onClick={() => setMode('random')} type='default'>
+          <ButtonEven onClick={() => setMode('random')} type='default' disabled={data.length === 0}>
             สุ่ม
           </ButtonEven>
-          <ButtonEven onClick={handleRemove} danger type='primary' loading={loadButtonRemove}>
+          <ButtonEven onClick={handleRemove} danger type='primary' loading={loadButtonRemove} disabled={data.length === 0}>
             ลบ
           </ButtonEven>
         </Space>
