@@ -12,6 +12,8 @@ interface BoardI {
 
 const Board = ({ name, setMode }: BoardI) => {
   const [loadPage, setLoadPage] = useState(true)
+  const [loadButtonReset, setLoadButtonReset] = useState(false)
+  const [loadButtonRemove, setLoadButtonRemove] = useState(false)
   const [data, setData] = useState<Array<PayloadBodyWord>>([])
 
   useEffect(() => {
@@ -24,15 +26,18 @@ const Board = ({ name, setMode }: BoardI) => {
   }, [])
 
   const handleReset = async () => {
+    setLoadButtonReset(true)
     await resetData()
     message.success('รีเซ็ตเกมแล้ว!')
+    setLoadButtonReset(false)
   }
 
   const handleRemove = async () => {
+    setLoadButtonRemove(true)
     await removeData()
     message.success('ลบหมดแล้ว!')
+    setLoadButtonRemove(false)
   }
-  
 
   return (
     <>
@@ -56,11 +61,13 @@ const Board = ({ name, setMode }: BoardI) => {
         }}
       >
         <Space size='small'>
-          <ButtonEven onClick={handleReset} danger>
+          <ButtonEven onClick={handleReset} danger loading={loadButtonReset}>
             รีเซ็ตเกม
           </ButtonEven>
-          <ButtonEven onClick={() => setMode('random')} type='default'>สุ่ม</ButtonEven>
-          <ButtonEven onClick={handleRemove} danger type='primary'>
+          <ButtonEven onClick={() => setMode('random')} type='default'>
+            สุ่ม
+          </ButtonEven>
+          <ButtonEven onClick={handleRemove} danger type='primary' loading={loadButtonRemove}>
             ลบ
           </ButtonEven>
         </Space>
