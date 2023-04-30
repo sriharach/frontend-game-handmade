@@ -1,4 +1,4 @@
-import { Button, Typography, Divider, Space, Spin, message } from 'antd'
+import { Button, Typography, Divider, Space, message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { type PayloadBodyWord } from '@/pages/api/prohibited-word/data'
@@ -11,7 +11,6 @@ interface BoardI {
 }
 
 const Board = ({ name, setMode }: BoardI) => {
-  const [loadPage, setLoadPage] = useState(true)
   const [loadButtonReset, setLoadButtonReset] = useState(false)
   const [loadButtonRemove, setLoadButtonRemove] = useState(false)
   const [data, setData] = useState<Array<PayloadBodyWord>>([])
@@ -19,13 +18,12 @@ const Board = ({ name, setMode }: BoardI) => {
   const randerData = async () => {
     const response: Array<PayloadBodyWord> = await getData()
     setData(response)
-    setLoadPage(false)
   }
 
   useEffect(() => {
     randerData()
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleReset = async () => {
@@ -46,32 +44,31 @@ const Board = ({ name, setMode }: BoardI) => {
   return (
     <>
       <Typography.Title level={2}>{name}</Typography.Title>
-      {loadPage ? (
-        <div style={{ textAlign: 'center' }}>
-          <Spin />
-        </div>
-      ) : (
-        <div style={{ height: 100, overflow: 'auto' }}>
-          {data.map((d, index) => (
-            <div key={index}>{d.word}</div>
-          ))}
-        </div>
-      )}
       <Divider />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
+      <ControllBox>
         <Space size='small'>
-          <ButtonEven onClick={handleReset} danger loading={loadButtonReset} disabled={data.length === 0}>
+          <ButtonEven
+            onClick={handleReset}
+            danger
+            loading={loadButtonReset}
+            disabled={data.length === 0}
+          >
             รีเซ็ตเกม
           </ButtonEven>
-          <ButtonEven onClick={() => setMode('random')} type='default' disabled={data.length === 0}>
+          <ButtonEven
+            onClick={() => setMode('random')}
+            type='default'
+            disabled={data.length === 0}
+          >
             สุ่ม
           </ButtonEven>
-          <ButtonEven onClick={handleRemove} danger type='primary' loading={loadButtonRemove} disabled={data.length === 0}>
+          <ButtonEven
+            onClick={handleRemove}
+            danger
+            type='primary'
+            loading={loadButtonRemove}
+            disabled={data.length === 0}
+          >
             ลบ
           </ButtonEven>
         </Space>
@@ -81,7 +78,7 @@ const Board = ({ name, setMode }: BoardI) => {
             + เพิ่ม
           </ButtonEven>
         </div>
-      </div>
+      </ControllBox>
     </>
   )
 }
@@ -91,5 +88,15 @@ export default Board
 const ButtonEven = styled(Button)`
   ${(props) => props.theme.breakpoints.md.down} {
     min-width: 80px;
+  }
+`
+
+const ControllBox = styled.div`
+  display: grid;
+  row-gap: 0.5rem;
+
+  ${(props) => props.theme.breakpoints.md.up} {
+    display: flex;
+    justify-content: space-between;
   }
 `
